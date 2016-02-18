@@ -5,7 +5,7 @@
 
 class Test{
 public:
-	Test(const char* theData = nullptr);
+	Test(int theAge, const char* theData = nullptr);
 	Test(Test&& t);
 	Test(const Test& t);
 	Test& operator=(Test&& t);
@@ -16,6 +16,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& theOutput, const Test& t);
 
 private:
+	int m_age;
 	char* m_pData;
 };
 
