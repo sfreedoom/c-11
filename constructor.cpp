@@ -3,7 +3,7 @@
 
 #include "constructor.h"
 
-Test::Test(const char* theData){
+Test::Test(int theAge, const char* theData) : m_age(theAge){
 	if(!theData)
 		m_pData = nullptr;
 	else{
@@ -13,7 +13,7 @@ Test::Test(const char* theData){
 	}
 }
 
-Test::Test(Test&& t):m_pData(t.m_pData){
+Test::Test(Test&& t) : m_age(t.m_age), m_pData(std::move(t.m_pData)){
 	t.m_pData = nullptr;
 }
 
@@ -24,6 +24,7 @@ Test::Test(const Test& t){
 		m_pData = new char [strlen(t.m_pData) + 1];
 		strncpy(m_pData, t.m_pData, strlen(t.m_pData));
 		m_pData[strlen(m_pData)] = '\0';
+		m_age = t.m_age;
 	}
 }
 
@@ -34,19 +35,20 @@ Test& Test::operator=(Test&& t){
 	m_pData = std::move(t.m_pData);
 	t.m_pData = nullptr;
 
+	m_age = t.m_age;
+
 	return *this;
 }
 
 Test& Test::operator=(Test& t){
-	assert(this != &t);
-
-	if(nullptr != t.m_pData)
-		m_pData = nullptr;
-	else{
+	if(this != &t)
 		delete [] m_pData;
+	else{
 		m_pData = new char [strlen(t.m_pData) + 1];
 		strncpy(m_pData, t.m_pData, strlen(t.m_pData));
 		m_pData[strlen(t.m_pData)] = '\0';
+
+		m_age = t.m_age;
 	}
 
 	return *this;
@@ -60,5 +62,5 @@ Test::~Test(){
 }
 
 std::ostream& operator<<(std::ostream& theOutput, const Test& t){
-	return theOutput << t.m_pData;
+	return theOutput << " age: " << t.m_age << '\t' << " name: " << t.m_pData;
 }
