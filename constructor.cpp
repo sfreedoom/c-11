@@ -64,3 +64,16 @@ Test::~Test(){
 std::ostream& operator<<(std::ostream& theOutput, const Test& t){
 	return theOutput << " age: " << t.m_age << '\t' << " name: " << t.m_pData;
 }
+
+//template<typename T>
+//void Employe_T<T>::setEmploye(int theAge, const char* theName){
+//		m_age = theAge;
+//		if(!theName)
+//			m_pData = nullptr;
+//		else{
+//			delete [] m_pData;
+//			m_pData = new char[strlen(theName) + 1];
+//			strncpy(m_pData, theName, strlen(theName));
+//			m_pData[strlen(theName)] = '\0';
+//		}
+//}
