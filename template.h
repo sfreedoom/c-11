@@ -42,6 +42,9 @@ class Validator{
 		void Validate(int x, int y, AttackerTest& d);
 };
 
+template<typename T> T funcT(T a, T b){
+	return a + b;
+}
 
 //#endif //UNIT_TEST
 
